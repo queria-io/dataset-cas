@@ -2,12 +2,13 @@ schema: plans
 name: documents
 title: 行政事業レビューが挙げる計画・通知等の PDF
 description: |-
-  行政事業レビューのシートが「関係する計画・通知等」に挙げる URL のうち、内閣官房のサイト（www.cas.go.jp）の PDF の一覧です。1 行が 1 つの URL で、2024 年度のシートから収録しています。
+  行政事業レビューのシートが「関係する計画・通知等」に挙げる URL のうち、内閣官房のサイト（www.cas.go.jp）の PDF の一覧です。1 行が 1 つの URL で、2024 年度のシートから収録しています。首相官邸のサイトの会議のページ（www.kantei.go.jp/jp/singi/）は内閣官房のサイト（www.cas.go.jp/jp/seisakukaigi/）に移転したので、シートの URL が官邸のものも移転先から取得して収録しています。
 
   - sha256 はファイルの中身の sha256 です。plans.pages はこの値で PDF を指します。同じ中身の PDF が別の URL で載っていると、sha256 が同じ行が複数あります
   - 取得できなかった URL（リンク切れ、PDF ではない応答）と、開けない PDF（壊れたもの、パスワードが要るもの）は入っていません
+  - fetched_url が PDF を取得した URL です。移転した官邸の会議の資料では url（シートの URL）と異なります
   - fetched_at が PDF を取得した日時です
-  - PDF の実体はこのデータセットに置いていません。url から内閣官房のサイトで開けます
+  - PDF の実体はこのデータセットに置いていません。fetched_url から内閣官房のサイトで開けます
 primary_key: [url]
 sources:
   - path: https://rssystem.go.jp
@@ -24,5 +25,8 @@ fields:
     title: バイト数
   - name: page_count
     title: ページ数
+  - name: fetched_url
+    title: 取得した URL
+    description: PDF を取得した URL。官邸の会議の資料は、url の https://www.kantei.go.jp/jp/singi/ を https://www.cas.go.jp/jp/seisakukaigi/ に置き換えた URL
   - name: fetched_at
     title: 取得日時
