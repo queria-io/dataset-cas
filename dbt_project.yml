@@ -1,0 +1,16 @@
+name: "cas"
+version: "1.0.0"
+
+profile: "cas"
+
+model-paths: ["models"]
+macro-paths: ["shared/macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  cas:
+    +database: cas
+    +materialized: table
