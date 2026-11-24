@@ -14,3 +14,10 @@ models:
   cas:
     +database: cas
     +materialized: table
+    plans:
+      raw:
+        +materialized: table
+      stg:
+        +materialized: ephemeral
+      mart:
+        +materialized: table
